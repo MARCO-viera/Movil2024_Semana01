@@ -3,10 +3,10 @@ package com.example.proyecto01;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     Button btn01, btn02, btn03, btn04, btn05, btn06, btn07, btn08, btn09, btn00, btnBorrar;
-    radioButton rbt01, rbt02, rbt03, rbt04, rbt05, rbt06;
+    RadioButton rbt01, rbt02, rbt03, rbt04, rbt05, rbt06;
     StringBuilder clave;
     int contador;
 
@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         btn00 = findViewById(R.id.btn00);
         btnBorrar = findViewById(R.id.btnBorrar);
 
+        rbt01 = findViewById(R.id.rbt01);
+        rbt02 = findViewById(R.id.rbt02);
+        rbt03 = findViewById(R.id.rbt03);
+        rbt04 = findViewById(R.id.rbt04);
+        rbt05 = findViewById(R.id.rbt05);
+        rbt06 = findViewById(R.id.rbt06);
+
         // Asignar un OnClickListener para cada botón
         btn01.setOnClickListener(onClickListener);
         btn02.setOnClickListener(onClickListener);
@@ -67,13 +74,49 @@ public class MainActivity extends AppCompatActivity {
             String numero = btn.getText().toString();
             clave.append(numero); // Agregar el número pulsado a la variable
             contador++;
+            iluminarRadioButton(contador);
             if (contador == 6) { // Si se han pulsado seis números
                 mostrarClave();
                 clave.setLength(0); // Limpiar la clave
                 contador = 0; // Reiniciar contador
+                deseleccionarRadioButtons();
             }
         }
     };
+
+    // Método para iluminar el RadioButton correspondiente
+    private void iluminarRadioButton(int contador) {
+        switch (contador) {
+            case 1:
+                rbt01.setChecked(true);
+                break;
+            case 2:
+                rbt02.setChecked(true);
+                break;
+            case 3:
+                rbt03.setChecked(true);
+                break;
+            case 4:
+                rbt04.setChecked(true);
+                break;
+            case 5:
+                rbt05.setChecked(true);
+                break;
+            case 6:
+                rbt06.setChecked(true);
+                break;
+        }
+    }
+
+    // Método para deseleccionar todos los RadioButtons
+    private void deseleccionarRadioButtons() {
+        rbt01.setChecked(false);
+        rbt02.setChecked(false);
+        rbt03.setChecked(false);
+        rbt04.setChecked(false);
+        rbt05.setChecked(false);
+        rbt06.setChecked(false);
+    }
 
     // Método para mostrar la clave con un Toast
     private void mostrarClave() {
